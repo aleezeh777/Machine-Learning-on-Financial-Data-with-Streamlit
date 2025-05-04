@@ -5,7 +5,8 @@ App Overview
 StockSavvy Analytics is a web-based application that enables users to analyze stock market data through a comprehensive machine learning pipeline. It supports both custom datasets (e.g., CSV files with columns like Date, Netsol_price, Mughal_price, Kohat_price) and live data from Yahoo Finance. With a sleek pastel-themed UI (coral and mint colors), the app guides users through data loading, preprocessing, feature engineering, model training, evaluation, and visualization.
 Key Features
 
-*Data Loading*: Upload CSV/Excel files or fetch real-time stock data (e.g., AAPL, TSLA) via Yahoo Finance.
+*Data Loading*:                
+Upload CSV/Excel files or fetch real-time stock data (e.g., AAPL, TSLA) via Yahoo Finance.
 Preprocessing: Handle missing values and clip outliers for clean data.
 Feature Engineering: Generate features like moving averages, volatility, and daily returns; visualize correlations and scatter matrices.
 Train/Test Split: Split data for model training with customizable test size.
@@ -16,16 +17,15 @@ User Experience: Progress tracking, downloadable results, and an intuitive inter
 
 **Tech Stack**
 
-Python: Core programming language.
-Streamlit: Web app framework.
-Pandas & NumPy: Data manipulation and analysis.
-Plotly: Interactive visualizations.
-Scikit-learn: Machine learning models.
-yfinance: Real-time stock data retrieval.
-openpyxl & tenacity: Excel support and robust API calls.
+Python: Core programming language.                  
+Streamlit: Web app framework.                
+Pandas & NumPy: Data manipulation and analysis.           
+Plotly: Interactive visualizations.             
+Scikit-learn: Machine learning models.                
+yfinance: Real-time stock data retrieval.                 
+openpyxl & tenacity: Excel support and robust API calls.           
 
-
-*Contributing*
+*Contributing*                    
 Contributions are welcome! Please open an issue or submit a pull request for bug fixes, feature enhancements, or documentation improvements.
 Acknowledgments
 
