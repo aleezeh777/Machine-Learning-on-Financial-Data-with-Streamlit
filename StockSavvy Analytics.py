@@ -457,8 +457,7 @@ def feature_engineering_step():
             **Interpretation**: The scatter matrix shows pairwise relationships between features. Diagonal plots are histograms of each feature. Strong linear patterns suggest high correlation (check the correlation matrix). Outliers or clusters may influence model training.
             </div>
         """, unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"❌ Visualization error: {e}")
+
     
     st.session_state.pipeline.update({'target': target, 'features': features, 'df_features': df, 'features_engineered': True})
     if st.button("Next ➡️", key="feature_next"):
