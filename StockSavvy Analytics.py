@@ -459,10 +459,7 @@ def feature_engineering_step():
         """, unsafe_allow_html=True)
 
     
-    st.session_state.pipeline.update({'target': target, 'features': features, 'df_features': df, 'features_engineered': True})
-    if st.button("Next ➡️", key="feature_next"):
-        st.session_state.pipeline['current_step'] = 4
-        st.rerun()
+
 
 def train_test_split_step():
     st.header("✂️ Step 4: Train/Test Split")
