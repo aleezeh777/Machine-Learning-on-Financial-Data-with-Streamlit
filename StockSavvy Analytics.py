@@ -426,7 +426,7 @@ def feature_engineering_step():
                                   default=[c for c in numeric_cols if c != target][:2], 
                                   help="Select features for modeling.")
     if not features:
-        st.warning("Select at least one feature!")
+        st.warning("Select at one feature!")
         return
     
     if st.checkbox("Apply Scaling", value=True, help="Standardize features for better model performance."):
@@ -448,13 +448,13 @@ def feature_engineering_step():
             </div>
         """, unsafe_allow_html=True)
         
-        fig = px.scatter_matrix(df[features], title='Feature Pair Plot', width=800, height=600, 
+        fig = px.scatter_matrix(df[features + [target]], title='Feature Pair Plot', width=800, height=600, 
                                 color_discrete_sequence=['#a7d8d3'], hover_data=[target])
         plot_config(fig, 'Feature Pair Plot', 'Features', 'Features')
         st.plotly_chart(fig)
         st.markdown("""
             <div class="interpretation">
-            **Interpretation**: The scatter matrix shows pairwise relationships between features. Diagonal plots are histograms of each feature. Strong linear patterns suggest high correlation (check the correlation matrix). Outliers or clusters may influence model training.
+            **Interpretation**: The scatter matrix shows pairwise relationships between features and the target. Diagonal plots are histograms of each feature. Strong linear patterns suggest high correlation (check the correlation matrix). Outliers or clusters may influence model training.
             </div>
         """, unsafe_allow_html=True)
     except Exception as e:
