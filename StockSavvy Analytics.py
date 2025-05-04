@@ -426,7 +426,7 @@ def feature_engineering_step():
                                   default=[c for c in numeric_cols if c != target][:2], 
                                   help="Select features for modeling.")
     if not features:
-        st.warning("Select at one feature!")
+        st.warning("Select at least one feature!")
         return
     
     if st.checkbox("Apply Scaling", value=True, help="Standardize features for better model performance."):
@@ -437,6 +437,18 @@ def feature_engineering_step():
             st.error(f"❌ Scaling error: {e}")
     
     try:
+        # Debugging: Display DataFrame columns and shape
+        st.write("**Debug Info: DataFrame Columns and Shape**")
+        st.write(f"Columns: {df.columns.tolist()}")
+        st.write(f"Shape: {df.shape}")
+        st.write(f"Selected Features: {features}")
+        st.write(f"Selected Target: {target}")
+        
+        # Verify target and features are in DataFrame
+        if not all(col in df.columns for col in features + [target]):
+            st.error(f"Missing columns: {[col for col in features + [target] if col not in df.columns]}")
+            return
+        
         corr_matrix = df[features + [target]].corr()
         fig = px.imshow(corr_matrix, text_auto=True, color_continuous_scale='RdBu_r', 
                         title='Feature Correlation Matrix', width=600, height=500)
@@ -448,13 +460,14 @@ def feature_engineering_step():
             </div>
         """, unsafe_allow_html=True)
         
+        # Removed hover_data to avoid column mismatch error
         fig = px.scatter_matrix(df[features + [target]], title='Feature Pair Plot', width=800, height=600, 
-                                color_discrete_sequence=['#a7d8d3'], hover_data=[target])
+                                color_discrete_sequence=['#a7d8d3'])
         plot_config(fig, 'Feature Pair Plot', 'Features', 'Features')
         st.plotly_chart(fig)
         st.markdown("""
             <div class="interpretation">
-            **Interpretation**: The scatter matrix shows pairwise relationships between features and the target. Diagonal plots are histograms of each feature. Strong linear patterns suggest high correlation (check the correlation matrix). Outliers or clusters may influence model training.
+            **Interpretation**: The scatter matrix shows pairwise relationships between features and the target. Diagonal plots are histograms of each variable. Strong linear patterns suggest high correlation (check the correlation matrix). Outliers or clusters may influence model training.
             </div>
         """, unsafe_allow_html=True)
     except Exception as e:
